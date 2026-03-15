@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import OgongLogo from "./OgongLogo";
 
 const links = [
   { label: "Formats", href: "#formats" },
@@ -27,7 +28,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2.5">
-          <OgongMark />
+          <OgongLogo size={28} />
           <span className="text-lg font-bold tracking-tight text-foreground">
             ogong
           </span>
@@ -53,25 +54,5 @@ export default function Navbar() {
         </a>
       </div>
     </nav>
-  );
-}
-
-function OgongMark() {
-  const colors = ["#FF8C42", "#FFB347", "#4A3AFF", "#7B6FFF", "#FF6B6B", "#FF8C42"];
-  return (
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-      {colors.map((c, i) => {
-        const angle = (i * 60 * Math.PI) / 180;
-        return (
-          <circle
-            key={i}
-            cx={16 + 11 * Math.cos(angle)}
-            cy={16 + 11 * Math.sin(angle)}
-            r={2.2}
-            fill={c}
-          />
-        );
-      })}
-    </svg>
   );
 }
