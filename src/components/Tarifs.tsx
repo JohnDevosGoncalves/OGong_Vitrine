@@ -8,12 +8,12 @@ const plans = [
     name: "Découverte",
     price: "Gratuit",
     period: "",
-    desc: "Pour tester OGong sur un premier événement.",
+    desc: "Parfait pour tester l'outil lors d'une petite réunion.",
     features: [
-      "1 événement",
       "Jusqu'à 20 participants",
-      "Speed Meeting uniquement",
+      "Tous les formats disponibles",
       "Chrono temps réel",
+      "Assignation automatique des tables",
       "Statistiques de base",
     ],
     cta: "Commencer gratuitement",
@@ -21,35 +21,34 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "49 €",
-    period: "/ mois",
-    desc: "Pour les organisateurs réguliers.",
+    price: "29 €",
+    period: "/ événement",
+    desc: "Sans abonnement. Facturé uniquement le jour J.",
     features: [
-      "Événements illimités",
       "Jusqu'à 200 participants",
       "Tous les formats",
-      "Import CSV",
-      "SMS aux participants",
+      "Export CSV des données",
+      "SMS aux participants inclus",
       "Statistiques complètes",
       "Support prioritaire",
     ],
-    cta: "Essai gratuit 14 jours",
+    cta: "Créer un événement",
     highlight: true,
   },
   {
     name: "Entreprise",
-    price: "Sur mesure",
-    period: "",
-    desc: "Pour les grandes structures et réseaux.",
+    price: "Sur devis",
+    period: "/ an",
+    desc: "Pour les structures qui organisent des dizaines d'événements par an.",
     features: [
       "Participants illimités",
+      "Abonnement annuel lissé",
+      "Gestionnaire de compte dédié",
       "Multi-administrateurs",
-      "API & intégrations",
-      "SSO / SAML",
-      "Accompagnement dédié",
-      "SLA garanti",
+      "Accompagnement & formation",
+      "Idéal CCI, grandes écoles, réseaux",
     ],
-    cta: "Nous contacter",
+    cta: "Demander un devis",
     highlight: false,
   },
 ];
@@ -72,7 +71,7 @@ export default function Tarifs() {
             Simple et transparent.
           </h2>
           <p className="text-muted mt-4 max-w-md mx-auto">
-            Pas de frais cachés. Changez de plan ou annulez à tout moment.
+            Pas d&apos;abonnement obligatoire. Payez à l&apos;événement, ou optez pour un forfait annuel.
           </p>
         </motion.div>
 
@@ -92,7 +91,7 @@ export default function Tarifs() {
             >
               {plan.highlight && (
                 <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-white bg-primary px-2.5 py-1 rounded-full mb-4">
-                  Populaire
+                  Recommandé
                 </span>
               )}
               <h3 className="text-lg font-bold">{plan.name}</h3>
