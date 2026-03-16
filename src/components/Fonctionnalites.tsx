@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Timer,
   TableProperties,
@@ -174,6 +175,13 @@ const features = [
   },
 ];
 
+const showcaseScreenshots = [
+  { src: "/screenshots/dashboard-evenements.png", alt: "Tableau de bord des événements", caption: "Tableau de bord" },
+  { src: "/screenshots/detail-evenement.png", alt: "Détail d'un événement avec participants", caption: "Détail événement" },
+  { src: "/screenshots/statistiques.png", alt: "Statistiques et KPIs de l'événement", caption: "Statistiques" },
+  { src: "/screenshots/admin-dashboard.png", alt: "Panneau d'administration avec graphiques", caption: "Administration" },
+];
+
 export default function Fonctionnalites() {
   return (
     <section id="fonctionnalites" className="py-20 md:py-28 px-6 bg-surface">
@@ -215,6 +223,50 @@ export default function Fonctionnalites() {
             </motion.div>
           ))}
         </div>
+
+        {/* Showcase gallery with real screenshots */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="mt-20"
+        >
+          <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-8 text-center">
+            Découvrez l&apos;application en images
+          </h3>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            {showcaseScreenshots.map((item, i) => (
+              <motion.div
+                key={item.src}
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group"
+              >
+                <div className="rounded-xl overflow-hidden border border-border shadow-xl bg-surface">
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-1.5 px-3 py-2 bg-surface border-b border-border">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-400/60" />
+                    <span className="ml-2 flex-1 h-5 rounded bg-background border border-border/60" />
+                  </div>
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    width={800}
+                    height={500}
+                    className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                </div>
+                <p className="text-sm text-muted text-center mt-3 font-medium">{item.caption}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

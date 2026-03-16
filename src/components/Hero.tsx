@@ -1,6 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+
+function BrowserFrame({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl overflow-hidden border border-border shadow-2xl bg-surface">
+      {/* Browser chrome bar */}
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-surface border-b border-border">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+        <span className="ml-2 flex-1 h-5 rounded bg-background border border-border/60" />
+      </div>
+      {children}
+    </div>
+  );
+}
 
 export default function Hero() {
   return (
@@ -53,64 +69,25 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* UI Preview hint */}
+        {/* Dashboard screenshot in browser frame */}
         <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 40, rotateY: -5 }}
+          animate={{ opacity: 1, x: 0, rotateY: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="hidden lg:block absolute right-0 top-8 w-[380px]"
+          className="hidden lg:block absolute right-0 top-4 w-[440px]"
+          style={{ perspective: "1000px" }}
         >
-          <div className="bg-surface rounded-2xl border border-border shadow-lg p-6">
-            {/* Mini timer UI */}
-            <div className="text-center mb-4">
-              <p className="text-xs text-muted uppercase tracking-wider mb-2">
-                Tour 1/4
-              </p>
-              <p className="text-2xl font-bold text-foreground">
-                C&apos;est à vous !
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 mb-5">
-              {[1, 4, 7].map((n) => (
-                <span
-                  key={n}
-                  className="w-8 h-8 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center"
-                >
-                  {n}
-                </span>
-              ))}
-            </div>
-
-            <div className="mb-3">
-              <div className="flex justify-between text-xs text-muted mb-1.5">
-                <span>Prise de parole 1/3</span>
-                <span>0:45 / 4:00</span>
-              </div>
-              <div className="w-full h-2 bg-border rounded-full overflow-hidden">
-                <div className="h-full w-[19%] bg-accent rounded-full" />
-              </div>
-            </div>
-
-            {/* Mini table */}
-            <div className="mt-5 pt-4 border-t border-border">
-              <p className="text-xs font-medium text-foreground mb-2">
-                Table 1 &middot; 3 participants
-              </p>
-              <div className="space-y-1.5">
-                {["Pan H.", "Emlen B.", "Jozef K."].map((name) => (
-                  <div
-                    key={name}
-                    className="flex items-center gap-2 text-xs text-muted"
-                  >
-                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center">
-                      {name[0]}
-                    </span>
-                    {name}
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="transform rotate-1 hover:rotate-0 transition-transform duration-500">
+            <BrowserFrame>
+              <Image
+                src="/screenshots/dashboard-evenements.png"
+                alt="Tableau de bord OGong avec la liste des événements"
+                width={880}
+                height={600}
+                className="w-full h-auto"
+                priority
+              />
+            </BrowserFrame>
           </div>
         </motion.div>
       </div>

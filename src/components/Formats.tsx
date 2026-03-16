@@ -2,76 +2,30 @@
 
 import { motion } from "framer-motion";
 import { Users, Briefcase, Building2 } from "lucide-react";
+import Image from "next/image";
 
-/* ── Mini UI mockups reproduisant l'app OGong ── */
-
-function SpeedMeetingMockup() {
+/* ── Browser frame for screenshots ── */
+function ScreenshotFrame({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="mt-5 rounded-lg border border-border bg-background p-3 text-[11px]">
-      {/* Timer header */}
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-muted text-[10px]">Tour 1/4</span>
-        <span className="px-1.5 py-0.5 rounded bg-green-100 text-green-600 text-[9px] font-medium">En cours</span>
+    <div className="mt-5 rounded-lg overflow-hidden border border-border shadow-xl">
+      {/* Browser chrome */}
+      <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-surface border-b border-border">
+        <span className="w-2 h-2 rounded-full bg-red-400/60" />
+        <span className="w-2 h-2 rounded-full bg-yellow-400/60" />
+        <span className="w-2 h-2 rounded-full bg-green-400/60" />
       </div>
-      {/* Circular timer */}
-      <div className="flex items-center justify-center mb-2">
-        <div className="relative w-16 h-16">
-          <svg viewBox="0 0 64 64" className="w-full h-full -rotate-90">
-            <circle cx="32" cy="32" r="28" fill="none" stroke="#e5e7eb" strokeWidth="3" />
-            <circle cx="32" cy="32" r="28" fill="none" stroke="#5B4CFF" strokeWidth="3"
-              strokeDasharray={`${2 * Math.PI * 28 * 0.7} ${2 * Math.PI * 28 * 0.3}`}
-              strokeLinecap="round" />
-          </svg>
-          <span className="absolute inset-0 flex items-center justify-center text-sm font-bold text-foreground">2:48</span>
-        </div>
-      </div>
-      {/* Participants row */}
-      <div className="flex items-center justify-center gap-3">
-        <div className="flex items-center gap-1.5">
-          <div className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center text-[9px] font-bold">A</div>
-          <span className="text-muted">↔</span>
-          <div className="w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center text-[9px] font-bold">B</div>
-        </div>
-      </div>
-      <div className="mt-2 h-1 rounded-full bg-border overflow-hidden">
-        <div className="h-full rounded-full bg-primary" style={{ width: "70%" }} />
-      </div>
+      <Image
+        src={src}
+        alt={alt}
+        width={600}
+        height={400}
+        className="w-full h-auto"
+      />
     </div>
   );
 }
 
-function TeamMockup() {
-  return (
-    <div className="mt-5 rounded-lg border border-border bg-background p-3 text-[11px]">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2.5">
-        <span className="text-muted text-[10px]">Tables 1 à 3</span>
-        <span className="text-[10px] text-foreground font-medium">6 participants</span>
-      </div>
-      {/* Table grid */}
-      <div className="space-y-1.5">
-        {[
-          { num: 1, people: ["Ma", "Lu", "So"] },
-          { num: 2, people: ["Ti", "Al", "No"] },
-        ].map((table) => (
-          <div key={table.num} className="flex items-center gap-2 p-1.5 rounded bg-surface border border-border/60">
-            <span className="w-5 h-5 rounded bg-primary/10 text-primary flex items-center justify-center text-[9px] font-bold shrink-0">
-              {table.num}
-            </span>
-            <div className="flex gap-1">
-              {table.people.map((p) => (
-                <span key={p} className="w-5 h-5 rounded-full bg-accent/10 text-accent text-[8px] font-medium flex items-center justify-center">
-                  {p}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 text-center text-[9px] text-muted">Répartition automatique</div>
-    </div>
-  );
-}
+/* ── Mini UI mockups ── */
 
 function JobDatingMockup() {
   return (
@@ -113,7 +67,7 @@ const formats = [
     subtitle: "1 contre 1",
     desc: "Des rencontres en face-à-face, minutées et enchaînées. Idéal pour du networking classique ou des entretiens rapides.",
     details: ["Tours automatiques", "Rotation des participants", "Chrono configurable"],
-    mockup: SpeedMeetingMockup,
+    screenshot: { src: "/screenshots/detail-evenement.png", alt: "Détail d'un événement Speed Meeting avec participants et statistiques de l'algorithme" },
   },
   {
     icon: Briefcase,
@@ -121,7 +75,7 @@ const formats = [
     subtitle: "XS à XL",
     desc: "Des groupes de tailles variées, assignés à des tables. Parfait pour des ateliers collaboratifs ou des brainstormings.",
     details: ["2 à 12 par table", "Temps de parole individuel", "Répartition automatique"],
-    mockup: TeamMockup,
+    screenshot: { src: "/screenshots/creer-evenement.png", alt: "Formulaire de création d'événement avec sélection du format" },
   },
   {
     icon: Building2,
@@ -129,6 +83,7 @@ const formats = [
     subtitle: "Avec exposants",
     desc: "Des sociétés exposantes accueillent les candidats sur leurs stands. Les créneaux sont réservés à l'avance.",
     details: ["Stands & créneaux", "Inscription candidat", "Gestion des exposants"],
+    screenshot: null,
     mockup: JobDatingMockup,
   },
 ];
@@ -179,8 +134,12 @@ export default function Formats() {
                   </li>
                 ))}
               </ul>
-              {/* Mini mockup UI */}
-              <format.mockup />
+              {/* Screenshot or fallback mockup */}
+              {format.screenshot ? (
+                <ScreenshotFrame src={format.screenshot.src} alt={format.screenshot.alt} />
+              ) : format.mockup ? (
+                <format.mockup />
+              ) : null}
             </motion.div>
           ))}
         </div>

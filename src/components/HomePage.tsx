@@ -8,6 +8,7 @@ import Probleme from "@/components/Probleme";
 import Formats from "@/components/Formats";
 import Comment from "@/components/Comment";
 import Fonctionnalites from "@/components/Fonctionnalites";
+import Apercu from "@/components/Apercu";
 import Temoignages from "@/components/Temoignages";
 import Tarifs from "@/components/Tarifs";
 import Cta from "@/components/Cta";
@@ -27,6 +28,7 @@ export default function HomePage() {
         <Formats />
         <Comment />
         <Fonctionnalites />
+        <Apercu />
         <Temoignages />
         <Tarifs />
         <Cta />
